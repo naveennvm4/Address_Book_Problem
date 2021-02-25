@@ -30,11 +30,11 @@ public class Addressbook {
 	}
 
 	public void edit(String[] contact) {
-		System.out.println("If you want to edit then press 1 else press 0");
+		System.out.println("Enter 1 to edit else press 0");
 		Scanner sc = new Scanner(System.in);
 		int read = sc.nextInt();
 		if (read == 1) {
-			System.out.println("Press the respective number you want to edit\n1  First Name\n2 Last Name\n3 City"
+			System.out.println("Enter which you want to edit\n1  First Name\n2 Last Name\n3 City"
 					+ "\n4 State\n5 zip Code\n6 phone number\n7 email");
 			int input = sc.nextInt();
 			switch (input) {
@@ -91,10 +91,36 @@ public class Addressbook {
 			System.out.println("Invalid Input");
 	}
 
+	public void delete(String[] contact) {
+		System.out.println("Enter the first name of the contact you want to delete");
+		Scanner sc = new Scanner(System.in);
+		String person_name = sc.next();
+		if (contact[1].equals(person_name)) {
+			for (int j = 0; j < contact.length; j++) {
+				contact[j] = " ";
+				System.out.println(contact[j]);
+			}
+			System.out.println("Your contact has been deleted");
+		}
+		else {
+			System.out.println("Contact name not available");
+		}
+	}
+
 	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
 		System.out.println("WELCOME to Address Book Program");
 		Addressbook contact = new Addressbook();
 		String[] info = contact.entry();
-		contact.edit(info);
+		System.out.println("1. EDIT\n2. DELETE\n3. NONE");
+		int action = sc.nextInt();
+		switch(action) {
+		case 1:
+			contact.edit(info);
+			break;
+		case 2:
+			contact.delete(info);
+			break;
+		}
 	}
 }
